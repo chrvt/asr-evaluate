@@ -9,15 +9,17 @@ from whisper_variants import (
     WhisperTimestampedVariant,
     WhisperMlxVariant,
 )
+import json
 
-
-def process(dataset, variant):
+def process(dataset, variant, args):
     print(f"Variant: {variant}")
     print(f"Dataset: {dataset}")
     print(f"Evaluating {len(dataset)} data points...")
 
     actual_list = []
     target_list = []
+    # List to store results
+    results = []
 
     for index in range(len(dataset)):
         actual, target, metrics = evaluate(dataset, index, variant)
@@ -27,7 +29,20 @@ def process(dataset, variant):
         print(target)
         actual_list.append(actual)
         target_list.append(target)
+
+        # Save the result as a dictionary in the list
+        result = {
+            "actual": actual,
+            "target": target,
+            "WER": metrics.wer
+        }
+        results.append(result)
+
         print("WER: {:2.1%}".format(metrics.wer))
+
+    # Save the list as a JSON file
+    with open("results/"+args.variant + "_" + args.dataset + ".json", "w") as outfile:
+        json.dump(results, outfile, indent=4)
 
     combined_metrics = process_words(
         " ".join(target_list),
@@ -108,4 +123,4 @@ if __name__ == "__main__":
     elif args.variant == "whisper_mlx":
         variant = WhisperMlxVariant()
 
-    process(dataset, variant)
+    process(dataset, variant, args)
