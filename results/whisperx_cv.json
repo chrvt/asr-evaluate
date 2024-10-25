@@ -1,0 +1,17 @@
+[
+    {
+        "actual": "zieht euch bitte drau\u00dfen die schuhe aus",
+        "target": "zieht euch bitte drau\u00dfen die schuhe aus",
+        "WER": 0.0
+    },
+    {
+        "actual": "es gibt auch mehrere campingpl\u00e4tze",
+        "target": "es gibt auch mehrere campingpl\u00e4tze",
+        "WER": 0.0
+    },
+    {
+        "actual": "als kind wollte er nach eigenen aussagen footballspieler werden",
+        "target": "als kind wollte er nach eigenen aussagen footballspieler werden",
+        "WER": 0.0
+    }
+]
